@@ -15,9 +15,6 @@ import net.java.sen.Token;
  * http://www.unixuser.org/~euske/doc/postag/
  * 抜き出したい品詞情報は上記サイトを参考。名詞の絞り方の例 ("名詞" or "名詞-固有名詞")など
  *
- * ちなみにこのライブラリで返す形態素は全て原型です。単語そのままの型で返したい場合は
- * token[i].getBasicString()をtoken[i].toString()に変えればOK
- *
  * また、このライブラリを使用するときは必ずsenConstractorを呼び出すこと。詳細は以下に。
  */
 /**
@@ -53,7 +50,7 @@ public class SenUtil {
 			//形態素解析
 			Token[] token = tagger.analyze(text);
 			for(int i = 0; i < token.length; i++){
-				System.out.println(token[i].getBasicString() + "\t" + token[i].getPos());
+				System.out.println(token[i].toString() + "\t" + token[i].getPos());
 			}
 		}
 		catch(IOException e){
@@ -73,7 +70,7 @@ public class SenUtil {
 			Token[] token = tagger.analyze(text);
 			List<String> words = new ArrayList<>();
 			for(int i = 0; i < token.length; i++){
-				words.add(token[i].getBasicString());
+				words.add(token[i].toString());
 			}
 			return words;
 		}
@@ -97,7 +94,7 @@ public class SenUtil {
 			List<String> words = new ArrayList<>();
 			for(int i = 0; i < token.length; i++){
 				if(token[i].getPos().contains(hinshi)){
-					words.add(token[i].getBasicString());
+					words.add(token[i].toString());
 				}
 			}
 			return words;
@@ -122,7 +119,7 @@ public class SenUtil {
 			List<String> words = new ArrayList<>();
 			for(int i = 0; i < token.length; i++){
 				if(setContainCheck(hinshiSet, token[i].getPos())){
-					words.add(token[i].getBasicString());
+					words.add(token[i].toString());
 				}
 			}
 			return words;
@@ -147,7 +144,7 @@ public class SenUtil {
 			List<String> words = new ArrayList<>();
 			for(int i = 0; i < token.length; i++){
 				if(!token[i].getPos().contains(hinshi)){
-					words.add(token[i].getBasicString());
+					words.add(token[i].toString());
 				}
 			}
 			return words;
@@ -172,7 +169,7 @@ public class SenUtil {
 			List<String> words = new ArrayList<>();
 			for(int i = 0; i < token.length; i++){
 				if(!setContainCheck(hinshiSet, token[i].getPos())){
-					words.add(token[i].getBasicString());
+					words.add(token[i].toString());
 				}
 			}
 			return words;

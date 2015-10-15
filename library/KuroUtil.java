@@ -1,19 +1,16 @@
 package library;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.atilika.kuromoji.Token;
 import org.atilika.kuromoji.Tokenizer;
 
-/*
- * SenUtil.javaの上位互換。kuromojiのほうが使いやすい。
- * https://github.com/atilika/kuromoji/downloads
- * ちなみにここからダウンロードしました。
- */
 /**
  * 以下メソッドの説明。
+ * senと違ってコンストラクタ呼び出さなくても使えるから便利だね☆
  *
  * analyze(text)			: テキストを受け取り形態素解析してリストで返す。
  * analyze(text, hinshi)	: テキストを受け取り形態素解析し、指定した品詞のもののみリストで返す。渡すStringの品詞のみ。
@@ -26,6 +23,17 @@ import org.atilika.kuromoji.Tokenizer;
 public class KuroUtil {
 
 	private static Tokenizer tokenizer = Tokenizer.builder().build();
+	public static void main(String[] args) {
+		// TODO 自動生成されたメソッド・スタブ
+		System.out.println(KuroUtil.analyze("毎日日本経済新聞を読みます。"));
+		System.out.println(KuroUtil.analyze("毎日日本経済新聞を読みます。", "名詞"));
+		Set<String> set = new HashSet<>();
+		set.add("名詞");
+		set.add("動詞");
+		System.out.println(KuroUtil.analyze("毎日日本経済新聞を読みます。", set));
+		System.out.println(KuroUtil.analyzeExcept("毎日日本経済新聞を読みます。", "名詞"));
+		System.out.println(KuroUtil.analyzeExcept("毎日日本経済新聞を読みます。", set));
+	}
 
 	/**
 	 * テキストを受け取り形態素解析してリストで返す。
